@@ -134,8 +134,7 @@ function process(){
     {
         let result=operand1+parseInt(displayBox.value);
         displayBox.value=result;
-        
-    }
+ }
 }
 function createButtons()
 {

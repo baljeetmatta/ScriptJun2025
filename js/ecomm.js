@@ -4,15 +4,14 @@ const container = document.querySelector("#container");
 let tasks = [];
 let id = 1;
 
+//localStorage.setItem("Data","Hello");
+
 /*
 addBtn.addEventListener("click",function(){
-
     const p=document.createElement("p");
     p.innerText=taskname.value;
     container.appendChild(p);
     taskname.value='';
-
-
 
 })*/
 
@@ -24,15 +23,21 @@ taskname.addEventListener("keypress", function (evt) {
         id++;
 
         tasks.push(task);
+        
 
         addToDom(task);
         console.log(tasks);
+        localStorage.setItem("tasks",JSON.stringify(tasks));
+
+        //document.write(JSON.stringify(tasks));
+       // "[object Object]"
+
     }
 
 })
 function addToDom(task) {
     const div = document.createElement("div");
-
+    div.setAttribute("id",task.taskid);
 
     const p = document.createElement("span");
     p.innerText = task.title;
@@ -55,6 +60,7 @@ function addToDom(task) {
             return item;
 
         })
+         localStorage.setItem("tasks",JSON.stringify(tasks));
         console.log(tasks);
 
     })
@@ -79,7 +85,28 @@ function addToDom(task) {
 }
 
 function deleteHandler(evt) {
-    evt.target.parentNode.remove();
+    const id=evt.target.parentNode.getAttribute("id");
 
+    evt.target.parentNode.remove();
+    tasks=tasks.filter(function(item){
+        if(item.taskid!=id)
+            return true;
+    })
+
+     localStorage.setItem("tasks",JSON.stringify(tasks));
 
 }
+//console.log(JSON.parse( localStorage.getItem("tasks"))[0].title);
+
+function loadStorage()
+{
+    tasks=JSON.parse(localStorage.getItem("tasks"))||[];
+    tasks.forEach(function(task){
+        addToDom(task);
+    })
+
+}
+loadStorage();
+/*
+Name, Quanity,Price,Description ->Add
+*/

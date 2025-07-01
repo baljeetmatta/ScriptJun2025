@@ -4,7 +4,7 @@ const container = document.querySelector("#container");
 let tasks = [];
 let id = 1;
 
-//localStorage.setItem("Data","Hello");
+
 
 /*
 addBtn.addEventListener("click",function(){
@@ -29,8 +29,7 @@ taskname.addEventListener("keypress", function (evt) {
         console.log(tasks);
         localStorage.setItem("tasks",JSON.stringify(tasks));
 
-        //document.write(JSON.stringify(tasks));
-       // "[object Object]"
+     
 
     }
 
@@ -60,8 +59,9 @@ function addToDom(task) {
             return item;
 
         })
-         localStorage.setItem("tasks",JSON.stringify(tasks));
+        
         console.log(tasks);
+        localStorage.setItem("tasks",JSON.stringify(tasks));
 
     })
     div.appendChild(chk);
@@ -93,20 +93,41 @@ function deleteHandler(evt) {
             return true;
     })
 
-     localStorage.setItem("tasks",JSON.stringify(tasks));
+console.log(tasks);
+localStorage.setItem("tasks",JSON.stringify(tasks));
 
 }
-//console.log(JSON.parse( localStorage.getItem("tasks"))[0].title);
-
 function loadStorage()
 {
-    tasks=JSON.parse(localStorage.getItem("tasks"))||[];
-    tasks.forEach(function(task){
+    if(localStorage.getItem("tasks"))
+    tasks= JSON.parse( localStorage.getItem("tasks"));
+    else
+    tasks=[];
+
+    tasks.forEach (function(task){
         addToDom(task);
+
     })
+    
 
 }
 loadStorage();
-/*
-Name, Quanity,Price,Description ->Add
+
+/*let a=10;
+
+let obj={name:"abc"};
+
+//console.log(typeof obj);
+//localStorage.setItem("keyname",JSON.stringify(obj));
+let obj1=JSON.parse(localStorage.getItem("keyname"));
+console.log(obj1);
 */
+
+//let data=localStorage.getItem("keyname");
+//console.log(data.name);
+//let data="Demo string"
+//document.write(data);
+//document.write(obj);
+//localStorage.setItem("keyname","Test");
+//console.log(localStorage.getItem("keyname"));
+

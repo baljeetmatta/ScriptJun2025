@@ -1,0 +1,146 @@
+<html>
+    <head>
+
+    </head>
+    <!-- 
+    Form Sumbit->Erros ->Server(complete & validated)
+    javascript ->Server->Download
+GET/POST
+GET - 
+COURIER ->VEHICLE -> GENERAL 
+1. SECURITY 
+2. RELIABLITY 
+PAGE->SERVER->BROWSER
+GET EXISTING CONNECTION->ADDRESS BAR
+URL?QUERYSTRING
+URL="/REGISTER?variablename=value&variable=value"
+POST-> background new socket connection
+COURIER ->
+1. SECURITY
+2. RELIABILITY
+2 FACTORS
+GET-> EXISTING CONNECTION
+POST->SEPERATE SOCKET CONNECTION
+RESOURCES
+1. SOCKET
+2. DATA
+3. ACKNOWLEDGEMENT
+4. RESEND
+5. SCOKET DISPONSE
+MEMORY/TIME
+GET 
+1. 2KB MAX TRUNCATED
+POST
+NO LIMIT 
+
+POST
+1. DATA IS >2KB
+2. <2KB ->SECURITY
+    onsubmit="return validate();"
+-->
+    <form action="/Register"  method="POST" id="form1">
+        <span id="errorMessage"></span>
+        <div>
+        username <input type="text" id="username" name="username"/>
+      </div>
+<div>
+Name <input type="text" id="name" name="name"/>
+</div>
+       <div> password <input type="password" id="password" name="password"/></div>
+      <div>   Email <input type="text" id="email" name="email"/>
+</div>
+<input type="text"/>
+       <input type="button" id="submitForm" value="Login-Button"/> 
+      
+         <input type="submit" id="submit" value="Login"/>
+
+    </form>
+    <button>Call me</button>
+
+    <script>
+        const submit=document.querySelector("#submit");
+
+        const form1=document.querySelector("#form1");
+        const username=document.querySelector("#username");
+        const name=document.querySelector("#name");
+        const email=document.querySelector("#email");
+        
+        const password=document.querySelector("#password");
+        const submitForm=document.querySelector("#submitForm");
+        const errorMessage=document.querySelector("#errorMessage");
+        submit.addEventListener("click",function(evt){
+            evt.preventDefault();
+
+            if(validate())
+            form1.submit();
+        })
+        function validate()
+        {
+             if(username.value=="")
+        {
+            errorMessage.innerText="Username is missing";
+
+           // alert("Please specify your name");
+            return false;
+        }
+        if(name.value=="")
+        {
+            errorMessage.innerText="Name is missing";
+           // alert("Please specify your name");
+            return false;
+
+        }
+        let nameData=name.value;
+        for(i=0;i<nameData.length;i++)
+        {
+            let char=nameData.charAt(i);
+            if(!(( (char>='a' && char<='z') || (char>='A' && char<='Z') ||(char==' ') )))
+        {
+            errorMessage.innerText="Name must have valid characters";
+            return false;
+        }
+        }
+        //1. @
+        //2. @ must not be the first character
+        //3. 3/4 . (.com)(.in)
+        let emailData=email.value;
+        if(emailData=="")
+        {
+            errorMessage.innerText="Not a valid email";
+            return false;
+        }
+        let pos=emailData.indexOf("@");
+        // 0 based ===-1, if not founded
+        if(pos==-1 || pos==0)
+        {
+             errorMessage.innerText="Not a valid email-@";
+            return false;
+
+        }
+       pos= emailData.indexOf("@",pos+1);
+        if(pos!=-1)
+        {
+             errorMessage.innerText="Not a valid email-Multiple times @";
+            return false;
+        }
+        pos=emailData.lastIndexOf(".");
+        if(!(emailData.length-pos==3 ||emailData.length-pos==4))
+        {
+errorMessage.innerText="Not a valid email-. not valid";
+            return false;
+        }
+//abc@gmail.in ---9--12 len-9 12-9=3 4
+        //indexOf("@")
+        //indexOf("@",start)
+        return true;
+           
+        }
+        submitForm.addEventListener("click",function(){
+           
+            if(validate()==true)
+                form1.submit();
+
+        })
+
+        </script>
+</html>

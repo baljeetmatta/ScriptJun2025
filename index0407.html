@@ -1,0 +1,59 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        
+        <button id="startBtn">Start</button>
+        <button id="stopBtn">Stop</button>
+        <div id="timer">00:00:00</div>
+        <script>
+            //pomodoro clock
+            //Work Time 10, Break Time 1min
+            //Work time 9:59
+            //Break time 00:59
+        let id=0; let intervalId;
+        let isworking=false;
+
+            const startBtn=document.querySelector("#startBtn");
+            const stopBtn=document.querySelector("#stopBtn");
+            const timer=document.querySelector("#timer")
+            startBtn.addEventListener("click",function(){
+                //clearInterval(intervalId);
+                if(isworking==false)
+                    {
+                        intervalId= setInterval(count,1000);
+                        isworking=true;
+                    }
+
+            })
+            stopBtn.addEventListener("click",function(){
+                clearInterval(intervalId);
+                isworking=false;
+
+            })
+            function count(){
+                id++;
+                timer.innerText=id;
+
+            }
+            /*console.log("Started...")
+          //  fun();
+            id= setTimeout(fun,1000);
+            clearTimeout(id)
+            //setInterval(fun,1000);
+
+            console.log("Done...")
+            console.log("Done 1...")
+
+
+            function fun()
+            {
+                console.log("Fun Executed");
+                //setTimeout(fun,1000);
+
+            }
+                */
+        </script>
+    </body>
+</html>
